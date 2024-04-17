@@ -2,12 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image;
 
 class PostsController extends Controller
 {
-    public function create() 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+    public function create()
     {
         return view('posts.create');
+    }
+
+    public function store()
+    {
+        $data = request()->validate([
+            'caption' => 'required',
+            'image' => ['required', 'image']
+        ]);
+
+        $image = request('image')->store('uploads', 'public');
+
+        $imageResize = Image::make(public_path("storage/{$image}"))->fit(1200, 1200);
+        $imageResize->save();
+
+        auth()->user()->posts()->create([
+            'caption' => $data['caption'],
+            'image' => $image,
+        ]);
+
+        return redirect('/home');
+
+        dd(request()->all());
     }
 }
