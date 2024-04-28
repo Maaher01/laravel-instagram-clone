@@ -9,7 +9,10 @@
         <div class="col-8 pt-5">
             <div class="d-flex gap-4 align-items-baseline justify-content-between">
                 <h4>{{ $user->handle }}</h4>
-                <a href="/post/create" class="btn btn-secondary">+ New</a>
+                <div>
+                    <a href="/post/create" class="btn btn-secondary">+ New Post</a>
+                    <a href="/home/{{ $user->id }}/edit" class="btn btn-secondary">Edit Profile</a>
+                </div>
             </div>
             <div class="d-flex gap-4">
                 <div><strong>{{ $user->posts->count() }}</strong> posts</div>

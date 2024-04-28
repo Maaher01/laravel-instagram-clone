@@ -23,6 +23,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home/{user}/edit', [HomeController::class, 'edit'])->name('edit');
+Route::patch('/home/{user}', [HomeController::class, 'update'])->name('update');
 
 Route::get('/post/create', [PostsController::class, 'create']);
 Route::post('/post', [PostsController::class, 'store']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class HomeController extends Controller
 {
@@ -28,5 +29,24 @@ class HomeController extends Controller
         return view('home.index', [
             'user' => $user
         ]);
+    }
+
+    public function edit(User $user)
+    {
+        return view('home.edit', compact('user'));
+    }
+
+    public function update(User $user)
+    {
+        $data = request()->validate([
+            'name' => 'required',
+            'handle' => 'required',
+            'biography' => '',
+            'email' => 'required'
+        ]);
+
+        $user->update($data);
+
+        return redirect("/home");
     }
 }
