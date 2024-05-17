@@ -34,7 +34,7 @@ class PostsController extends Controller
             'image' => $image,
         ]);
 
-        return redirect('/home');
+        return redirect('/');
 
         dd(request()->all());
     }
