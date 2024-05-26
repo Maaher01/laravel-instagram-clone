@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+Route::get('/', function () { return redirect('/profile/{user}'); });
 Route::get('/profile/{user}', [ProfilesController::class, 'index'])->name('profile.show');
 Route::get('/profile/{user}/edit', [ProfilesController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{user}', [ProfilesController::class, 'update'])->name('profile.update');
@@ -19,3 +20,7 @@ Route::get('/post/{post}', [PostsController::class, 'show']);
 Route::get('/email', function () {
     return new NewUserWelcomeMail();
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

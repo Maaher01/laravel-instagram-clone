@@ -8,16 +8,23 @@
         </div>
         <div class="col-8 pt-5">
             <div class="d-flex gap-4 align-items-baseline justify-content-between">
-                <h4>{{ $user->handle }}</h4>
+                <div class="d-flex align-items-baseline gap-4 mb-3">
+                    <h4>{{ $user->handle }}</h4>
+                    <FollowButton />
+                </div>
                 <div>
-                    <a href="/post/create" class="btn btn-secondary">+ New Post</a>
-                    <a href="/profile/{{ $user->id }}/edit" class="btn btn-secondary">Edit Profile</a>
+                    @can('update', $user->profile)
+                        <a href="/post/create" class="btn btn-secondary">+ New Post</a>
+                    @endcan
+                    @can('update', $user->profile)
+                        <a href="/profile/{{ $user->id }}/edit" class="btn btn-secondary">Edit Profile</a>
+                    @endcan
                 </div>
             </div>
             <div class="d-flex gap-4">
                 <div><strong>{{ $postCount }}</strong> posts</div>
-                <div><strong>133</strong> followers</div>
-                <div><strong>127</strong> following</div>
+                <div><strong>0</strong> followers</div>
+                <div><strong>0</strong> following</div>
             </div>
             <div class="pt-1"><strong>{{ $user->name }}</strong></div>
             <div class="pt-1">{{ $user->profile->biography }}</div>
