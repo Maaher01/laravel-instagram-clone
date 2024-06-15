@@ -10,7 +10,7 @@
             <div class="d-flex gap-4 align-items-baseline justify-content-between">
                 <div class="d-flex align-items-baseline gap-4 mb-3">
                     <h4>{{ $user->handle }}</h4>
-                    <FollowButton />
+                    <div id="follow-button" user-id="{{ $user->id }}" follows="{{ $follows ? 'true' : 'false' }}"></div>
                 </div>
                 <div>
                     @can('update', $user->profile)
@@ -23,8 +23,8 @@
             </div>
             <div class="d-flex gap-4">
                 <div><strong>{{ $postCount }}</strong> posts</div>
-                <div><strong>0</strong> followers</div>
-                <div><strong>0</strong> following</div>
+                <div><strong>{{ $followersCount }}</strong> followers</div>
+                <div><strong>{{ $followingCount }}</strong> following</div>
             </div>
             <div class="pt-1"><strong>{{ $user->name }}</strong></div>
             <div class="pt-1">{{ $user->profile->biography }}</div>
