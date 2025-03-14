@@ -20,7 +20,7 @@ class Profile extends Model
 
     public function followers()
     {
-        return $user->belongsToMany(User::class);
+        return $this->belongsToMany(User::class);
     }
 
     public function user()
